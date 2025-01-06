@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
-    // ¿©±â´Â ¼¼ÆÃ¿¡ °ü·ÃµÈ ¹öÆ°À» °ü¸®ÇÒ ½ºÅ©¸³Æ®ÀÓ.
-    // ¹öÆ° »ı¼º½Ã ¾îµğ¿¡¼­ ¾î¶²¸ñÀûÀ¸·Î »ç¿ëÇÒÁö ÁÖ¼® ´Ş¾ÆÁÖ±â.
+    // ì—¬ê¸°ëŠ” ì„¸íŒ…ì— ê´€ë ¨ëœ ë²„íŠ¼ì„ ê´€ë¦¬í•  ìŠ¤í¬ë¦½íŠ¸ì„.
+    // ë²„íŠ¼ ìƒì„±ì‹œ ì–´ë””ì—ì„œ ì–´ë–¤ëª©ì ìœ¼ë¡œ ì‚¬ìš©í• ì§€ ì£¼ì„ ë‹¬ì•„ì£¼ê¸°.
 
-    private Button _settingButton; // ¼¼ÆÃ ¹öÆ°
-    private Button _settingSaveButton; // ¼¼ÆÃÃ¢ Save ¹öÆ°
-    private Button _settingBackButton; // ¼¼ÆÃÃ¢ Back ¹öÆ°
-    private GameObject _settingPanal; // ¼¼ÆÃ ÆĞ³Î ¿Â¿ÀÇÁ ¿ëµµ
+    private Button _settingButton; // ì„¸íŒ… ë²„íŠ¼
+    private Button _settingSaveButton; // ì„¸íŒ…ì°½ Save ë²„íŠ¼
+    private Button _settingBackButton; // ì„¸íŒ…ì°½ Back ë²„íŠ¼
+    private GameObject _settingPanal; // ì„¸íŒ… íŒ¨ë„ ì˜¨ì˜¤í”„ ìš©ë„
 
     private void Awake()
     {
-        // ¿ÀºêÁ§Æ®°¡ ¾î¶²°ÇÁö ÁöÁ¤ÇØÁÖ´Â ºÎºĞ
+        // ì˜¤ë¸Œì íŠ¸ê°€ ì–´ë–¤ê±´ì§€ ì§€ì •í•´ì£¼ëŠ” ë¶€ë¶„
         _settingButton = transform.Find("Button - Setting").GetComponent<Button>();
         _settingSaveButton = transform.Find("Panel - Popup/Button - Save").GetComponent<Button>();
         _settingBackButton = transform.Find("Panel - Popup/Button - Back").GetComponent<Button>();
@@ -24,10 +24,10 @@ public class SettingManager : MonoBehaviour
     private void Start()
     {
 
-        // ½ÃÀÛÇÒ¶§ ÀÌ ÆË¾÷Ã¢Àº ºñÈ°¼ºÈ­ »óÅÂ¿©¾ßÇÔ.
+        // ì‹œì‘í• ë•Œ ì´ íŒì—…ì°½ì€ ë¹„í™œì„±í™” ìƒíƒœì—¬ì•¼í•¨.
         _settingPanal.SetActive(false);
 
-        // ¹öÆ°ÀÌº¥Æ® µî·ÏºÎºĞ.
+        // ë²„íŠ¼ì´ë²¤íŠ¸ ë“±ë¡ë¶€ë¶„.
         _settingButton.onClick.AddListener(SettingButtonClick);
         _settingSaveButton.onClick.AddListener(() => SettingPopUpButtonClick(0));
         _settingBackButton.onClick.AddListener(() => SettingPopUpButtonClick(1));
@@ -35,16 +35,16 @@ public class SettingManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼¼ÆÃ ¹öÆ° Å¬¸¯½Ã È£ÃâÇÒ ÇÔ¼ö.
+    /// ì„¸íŒ… ë²„íŠ¼ í´ë¦­ì‹œ í˜¸ì¶œí•  í•¨ìˆ˜.
     /// </summary>
     private void SettingButtonClick()
     {
-        Utils.Log(" ¼¼ÆÃ ¹öÆ° Å¬¸¯ ");
+        Utils.Log(" ì„¸íŒ… ë²„íŠ¼ í´ë¦­ ");
         _settingPanal.SetActive(true);
     }
 
     /// <summary>
-    /// ¼¼ÆÃÃ¢ ÆË¾÷ ¹öÆ° Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÇÔ¼ö.
+    /// ì„¸íŒ…ì°½ íŒì—… ë²„íŠ¼ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  í•¨ìˆ˜.
     /// </summary>
     /// <param name="num"> 0 = Save / 1 = Back </param>
     private void SettingPopUpButtonClick(int num)
@@ -52,12 +52,12 @@ public class SettingManager : MonoBehaviour
         switch (num)
         {
             case 0:
-                // Todo: ¼³Á¤ ÀúÀåÇÏ´Â Ã³¸® ·ÎÁ÷.
-                Utils.Log(" Save ¹öÆ° Å¬¸¯ , ÀúÀåÇÏ´Â ·ÎÁ÷ Ã³¸® ");
+                // Todo: ì„¤ì • ì €ì¥í•˜ëŠ” ì²˜ë¦¬ ë¡œì§.
+                Utils.Log(" Save ë²„íŠ¼ í´ë¦­ , ì €ì¥í•˜ëŠ” ë¡œì§ ì²˜ë¦¬ ");
 
                 break;
             case 1:
-                Utils.Log(" Back ¹öÆ° Å¬¸¯ ");
+                Utils.Log(" Back ë²„íŠ¼ í´ë¦­ ");
 
                 break;
 
@@ -65,7 +65,7 @@ public class SettingManager : MonoBehaviour
                 break;
         }
 
-        // ÆË¾÷Ã¢ ¼û±â±â.
+        // íŒì—…ì°½ ìˆ¨ê¸°ê¸°.
         _settingPanal.SetActive(false);
 
     }
