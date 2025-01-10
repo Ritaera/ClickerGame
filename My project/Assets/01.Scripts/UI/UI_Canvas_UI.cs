@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 
 
-public class UI_StartScene : MonoBehaviour
+public class UI_Canvas_UI : MonoBehaviour
 {
 
-    // 여기는 Start Scene에 있는 UI 관련된 버튼을 관리할 스크립트임.
+    // 여기는 Start Scene에 있는 Canvas - UI 관련된 버튼을 관리할 스크립트임.
     // 버튼 생성시 어디에서 어떤목적으로 사용할지 주석 달아주기.
 
     private Button _uiUpgradeButton; // 업그레이드 버튼
@@ -20,8 +20,12 @@ public class UI_StartScene : MonoBehaviour
     private GameObject _bagScrollViewGameObject; // 가방 스크롤뷰 게임오브젝트
     private GameObject _dispatchedScrollViewGameObject; // 파견 스크롤뷰 게임오브젝트
 
+    private GameObject _shopPanal; // 상점 패널 오브젝트(온오프용)
     private Button _shopBackButton; // 상점에서 나가기 버튼
+    private Button _shopAdvertisementRewordButton; // 상점에서 광고보기 버튼
+    private Button _shopDonationButton; // 상점에서 후원하기 버튼
 
+    // 스크롤 뷰가 켜져있는지 확인하는 Bool 값들
     private bool _upgradeScrollViewSetActive = false;
     private bool _miniGameScrollViewSetActive = false;
     private bool _bagScrollViewSetActive = false;
@@ -41,7 +45,10 @@ public class UI_StartScene : MonoBehaviour
         _bagScrollViewGameObject = gameObject.transform.Find("GameObject - Popups/Panel - PopUp/Scroll View - Bag").gameObject;
         _dispatchedScrollViewGameObject = gameObject.transform.Find("GameObject - Popups/Panel - PopUp/Scroll View - Dispatched").gameObject;
 
+        _shopPanal = gameObject.transform.Find("Panel - Shop").gameObject;
         _shopBackButton = transform.Find("Panel - Shop/GameObject - Buttons/Button - ShopBack").GetComponent<Button>();
+        _shopAdvertisementRewordButton = transform.Find("Panel - Shop/GameObject - Buttons/Button - ADReword").GetComponent<Button>();
+        _shopDonationButton = transform.Find("Panel - Shop/GameObject - Buttons/Button - Donation").GetComponent<Button>();
     }
 
     private void Start()
@@ -54,8 +61,11 @@ public class UI_StartScene : MonoBehaviour
         _uiMiniGameButton.onClick.AddListener(UiMiniGameButtonClick);
         _uiBagButton.onClick.AddListener(UiBagButtonClick);
         _uiDispatchedButton.onClick.AddListener(UiDispatchedButtonClick);
-        // _uiShopButton.onClick.AddListener();
-        // _shopBackButton.onClick.AddListener();
+        _uiShopButton.onClick.AddListener(UiShopButtonClick);
+
+        _shopBackButton.onClick.AddListener(() => InShopButtonClick(0));
+        _shopAdvertisementRewordButton.onClick.AddListener(() => InShopButtonClick(1));
+        _shopDonationButton.onClick.AddListener(() => InShopButtonClick(2));
     }
 
     /// <summary>
@@ -119,8 +129,8 @@ public class UI_StartScene : MonoBehaviour
     }
 
     /// <summary>
-     /// UIBag 버튼눌렀을때 실행될 함수.
-     /// </summary>
+    /// UIBag 버튼눌렀을때 실행될 함수.
+    /// </summary>
     private void UiBagButtonClick()
     {
         if (_bagScrollViewSetActive)
@@ -144,8 +154,8 @@ public class UI_StartScene : MonoBehaviour
     }
 
     /// <summary>
-     /// UIDispatched 버튼눌렀을때 실행될 함수.
-     /// </summary>
+    /// UIDispatched 버튼눌렀을때 실행될 함수.
+    /// </summary>
     private void UiDispatchedButtonClick()
     {
         if (_dispatchedScrollViewSetActive)
@@ -165,6 +175,41 @@ public class UI_StartScene : MonoBehaviour
             _upgradeScrollViewSetActive = false;
             _miniGameScrollViewSetActive = false;
             _bagScrollViewSetActive = false;
+        }
+    }
+
+    /// <summary>
+    /// UIShop 버튼눌렀을때 실행될 함수.
+    /// </summary>
+    private void UiShopButtonClick()
+    {
+        _shopPanal.SetActive(true); // 상점 패널 온
+    }
+
+    /// <summary>
+    /// 상점안에서 버튼눌렀을때 실행될 함수.
+    /// </summary>
+    /// <param name="num">0 = 나가기, 1 = 광고보기, 2 = 후원하기</param>
+    private void InShopButtonClick(int num)
+    {
+        switch (num)
+        {
+            case 0:
+                // 상점에서 ShopBack 버튼 눌렀을때 실행할 곳.
+                _shopPanal.SetActive(false);
+                break;
+            case 1:
+                // 상점에서 ADReword 버튼 눌렀을때 실행할 곳.
+                // Todo: 광고 설정후 여기와서 수정해야함.
+
+                break;
+            case 2:
+                // 상점에서 Donation 버튼 눌렀을때 실행할 곳.
+                // Todo: 후원 설정후 여기와서 수정해야함.
+
+                break;
+            default:
+                break;
         }
     }
 }
